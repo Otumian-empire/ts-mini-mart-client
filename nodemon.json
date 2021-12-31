@@ -1,0 +1,6 @@
+{
+  "ignore": ["./cli-build"],
+  "watch": ["./src"],
+  "exec": "npm start",
+  "ext": "ts"
+}
