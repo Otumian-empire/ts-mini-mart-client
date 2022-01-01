@@ -10,10 +10,11 @@ export default class ProductWrapper extends BaseWrapper {
     this.path = "/product";
   }
 
-  // create product
-  create = ({ name, price, count }: ProductDefinition) => {
+  // Create/Add Product with name, description, price and count
+  create = ({ name, description, price, count }: ProductDefinition) => {
     const req = new AxiosBaseRequest(this.path, "POST", {
       name,
+      description,
       price,
       count,
     });
@@ -21,28 +22,31 @@ export default class ProductWrapper extends BaseWrapper {
     this.makeRequest(req);
   };
 
-  // list/read all products
+  // List all Products
   list = () => {
     const req = new AxiosBaseRequest(this.path);
     this.makeRequest(req);
   };
 
-  // read one
-  read = (id: number) => {
-    const req = new AxiosBaseRequest(`${this.path}/${id}`);
+  // Read a Product by productId
+  read = (productId: number) => {
+    const req = new AxiosBaseRequest(`${this.path}/${productId}`);
     this.makeRequest(req);
   };
 
-  // remove/delete product
-  remove = (id: number) => {
-    const req = new AxiosBaseRequest(this.path, "DELETE", { productId: id });
+  // Delete a Product by productId
+  remove = (productId: number) => {
+    const req = new AxiosBaseRequest(this.path, "DELETE", { productId });
     this.makeRequest(req);
   };
 
-  // update product
-  update = (id: number, { price, count, description }: ProductDefinition) => {
+  // Update a Product by productId passing name, description, price and count
+  update = (
+    productId: number,
+    { price, count, description }: ProductDefinition
+  ) => {
     const req = new AxiosBaseRequest(this.path, "PUT", {
-      productId: id,
+      productId,
       price,
       count,
       description,

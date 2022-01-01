@@ -10,7 +10,7 @@ export default class UserWrapper extends BaseWrapper {
     this.path = "/user";
   }
 
-  // create user
+  // Create/Add User with name, email and address
   create = ({ name, email, address }: UserDefinition) => {
     const req = new AxiosBaseRequest(this.path, "POST", {
       name,
@@ -21,28 +21,28 @@ export default class UserWrapper extends BaseWrapper {
     this.makeRequest(req);
   };
 
-  // list/read all users
+  // List all Users
   list = () => {
     const req = new AxiosBaseRequest(this.path);
     this.makeRequest(req);
   };
 
-  // read one
-  read = (id: number) => {
-    const req = new AxiosBaseRequest(`${this.path}/${id}`);
+  // Read a User by userId
+  read = (userId: number) => {
+    const req = new AxiosBaseRequest(`${this.path}/${userId}`);
     this.makeRequest(req);
   };
 
-  // remove/delete user
-  remove = (id: number) => {
-    const req = new AxiosBaseRequest(this.path, "DELETE", { userId: id });
+  // Delete User by userId
+  remove = (userId: number) => {
+    const req = new AxiosBaseRequest(this.path, "DELETE", { userId });
     this.makeRequest(req);
   };
 
-  // update user
-  update = (id: number, { name, email, address }: UserDefinition) => {
+  // Update User by userId passing the name, email and address
+  update = (userId: number, { name, email, address }: UserDefinition) => {
     const req = new AxiosBaseRequest(this.path, "PUT", {
-      userId: id,
+      userId,
       name,
       email,
       address,

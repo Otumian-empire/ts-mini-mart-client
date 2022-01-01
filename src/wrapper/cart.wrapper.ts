@@ -10,7 +10,7 @@ export default class CartWrapper extends BaseWrapper {
     this.path = "/cart";
   }
 
-  // create user
+  // Create/Add cart with userId, productId and productCount
   create = ({ userId, productId, productCount }: CartDefinition) => {
     const req = new AxiosBaseRequest(this.path, "POST", {
       userId,
@@ -21,41 +21,42 @@ export default class CartWrapper extends BaseWrapper {
     this.makeRequest(req);
   };
 
-  // list/read all users
+  // List all Carts
   list = () => {
     const req = new AxiosBaseRequest(this.path);
     this.makeRequest(req);
   };
 
-  // read by user id
-  read = (id: number) => {
-    const req = new AxiosBaseRequest(`${this.path}/${id}`);
+  // Read all Cart items By userId
+  read = (userId: number) => {
+    const req = new AxiosBaseRequest(`${this.path}/${userId}`);
     this.makeRequest(req);
   };
 
-  // read one of user id by cart id
-  readX = (uId: number, cId: number) => {
-    const req = new AxiosBaseRequest(`${this.path}/${uId}/${cId}`);
+  // Read one specific Cart item of a User by passing the userId and cartId
+  readX = (userId: number, cartId: number) => {
+    const req = new AxiosBaseRequest(`${this.path}/${userId}/${cartId}`);
     this.makeRequest(req);
   };
 
-  // remove/delete user
-  remove = (id: number) => {
-    const req = new AxiosBaseRequest(this.path, "DELETE", { userId: id });
+  // Delete Cart by userId
+  remove = (userId: number) => {
+    const req = new AxiosBaseRequest(this.path, "DELETE", { userId });
     this.makeRequest(req);
   };
 
-  // remove/delete user
-  removeX = (uId: number, cId: number) => {
-    const req = new AxiosBaseRequest(`${this.path}/${cId}`, "DELETE", {
-      userId: uId,
+  // Delete a specific Cart item of a User by passing userId and cartId
+  removeX = (userId: number, cartId: number) => {
+    const req = new AxiosBaseRequest(`${this.path}/${cartId}`, "DELETE", {
+      userId,
     });
+
     this.makeRequest(req);
   };
 
-  // update user
-  update = (cId: number, { userId, productCount }: CartDefinition) => {
-    const req = new AxiosBaseRequest(`${this.path}/${cId}`, "PUT", {
+  // Update Cart of a User with userId, cartId and  productCount
+  update = (cartId: number, { userId, productCount }: CartDefinition) => {
+    const req = new AxiosBaseRequest(`${this.path}/${cartId}`, "PUT", {
       userId,
       productCount,
     });
