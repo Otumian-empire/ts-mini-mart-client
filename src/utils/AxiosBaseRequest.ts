@@ -1,13 +1,17 @@
-import { Method as IAxiosMethod } from "axios";
+import { Method as AxiosMethodType } from "axios";
 import { BASE_URL } from "../config/config";
 
-export class AxiosBaseRequest {
-  public url: string = BASE_URL;
-  public method: IAxiosMethod = "GET";
+export default class AxiosBaseRequest {
+  public url: string;
+  public method: AxiosMethodType;
   public data: any = {};
 
-  constructor(path: string, method: IAxiosMethod = "GET", data: any = {}) {
-    this.url = this.url + path;
+  constructor(
+    path: string = "",
+    method: AxiosMethodType = "GET",
+    data: any = {}
+  ) {
+    this.url = BASE_URL + path;
     this.method = method;
     this.data = data;
   }

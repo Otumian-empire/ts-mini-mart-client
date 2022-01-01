@@ -1,6 +1,6 @@
-import { Definition as BaseDefinition } from "./base.definition";
+import BaseDefinition from "./base.definition";
 
-export class Cart extends BaseDefinition {
+export default class Cart extends BaseDefinition {
   userId: number;
   productId: number;
   productCount: number;

@@ -1,6 +1,6 @@
-import { Definition as BaseDefinition } from "./base.definition";
+import BaseDefinition from "./base.definition";
 
-export class User extends BaseDefinition {
+export default class UserDefinition extends BaseDefinition {
   name: string;
   email: string;
   address: string;

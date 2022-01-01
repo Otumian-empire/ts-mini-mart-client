@@ -1,6 +1,6 @@
-import { Definition as BaseDefinition } from "./base.definition";
+import BaseDefinition from "./base.definition";
 
-export class Product extends BaseDefinition {
+export default class Product extends BaseDefinition {
   name: string;
   description: string;
   price: number;
