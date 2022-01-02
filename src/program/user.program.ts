@@ -9,7 +9,7 @@ export default function UserProgram(App: Command): void {
   App.command("createUser <name> <email> <address>")
     .aliases(["cu", "addUser"])
     .description("Add user with name, email and address")
-    .action((name, email, address) => {
+    .action((name: string, email: string, address: string) => {
       const user = new UserDefinition(name, email, address);
       userWrapper.create(user);
     });
@@ -24,20 +24,20 @@ export default function UserProgram(App: Command): void {
   App.command("readUser <userId>")
     .aliases(["ru", "user"])
     .description("Read a User by userId")
-    .action((userId: number) => userWrapper.read(userId));
+    .action((userId: number) => userWrapper.read(Number(userId)));
 
   // Delete User by userId
   App.command("removeUser <userId>")
     .aliases(["rmu", "dU"])
     .description("Delete User by userId")
-    .action((userId: number) => userWrapper.remove(userId));
+    .action((userId: number) => userWrapper.remove(Number(userId)));
 
   // Update User by userId passing the name, email and address
   App.command("updateUser <userId> <name> <email> <address>")
     .aliases(["uu", "pU"])
     .description("Update User by userId passing the name, email and address")
-    .action((userId, name, email, address) => {
+    .action((userId: number, name: string, email: string, address: string) => {
       const user = new UserDefinition(name, email, address);
-      userWrapper.update(userId, user);
+      userWrapper.update(Number(userId), user);
     });
 }

@@ -9,8 +9,8 @@ export default function checkoutProgram(App: Command): void {
   App.command("createCheckout <userId>")
     .aliases(["ck", "addCheckout"])
     .description("Add Checkout with userId")
-    .action((userId) => {
-      const checkout = new CheckoutDefinition(userId);
+    .action((userId: number) => {
+      const checkout = new CheckoutDefinition(Number(userId));
       checkoutWrapper.create(checkout);
     });
 
@@ -24,13 +24,13 @@ export default function checkoutProgram(App: Command): void {
   App.command("readCheckout <userId>")
     .aliases(["rk", "checkout"])
     .description("Read all Checkout items by User with userId")
-    .action((userId: number) => checkoutWrapper.read(userId));
+    .action((userId: number) => checkoutWrapper.read(Number(userId)));
 
   // Delete Checkout by of a User by userId
   App.command("removeCheckout <userId>")
     .aliases(["rmk", "dK"])
     .description("Delete Checkout by of a User by userId")
-    .action((userId: number) => checkoutWrapper.remove(userId));
+    .action((userId: number) => checkoutWrapper.remove(Number(userId)));
 
   // Delete a specific Checkout item of User with userId and checkoutId
   App.command("removeCheckoutX <userId> <checkoutId>")
@@ -39,6 +39,6 @@ export default function checkoutProgram(App: Command): void {
       "Delete a specific Checkout item of User with userId and checkoutId"
     )
     .action((userId: number, checkoutId: number) => {
-      checkoutWrapper.removeX(userId, checkoutId);
+      checkoutWrapper.removeX(Number(userId), Number(checkoutId));
     });
 }

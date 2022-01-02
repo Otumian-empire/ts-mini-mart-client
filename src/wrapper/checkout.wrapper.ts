@@ -12,7 +12,9 @@ export default class CheckoutWrapper extends BaseWrapper {
 
   // Create/Add Checkout with userId
   create = ({ userId }: CheckoutDefinition) => {
-    const req = new AxiosBaseRequest(this.path, "POST", { userId });
+    const req = new AxiosBaseRequest(this.path, "POST", {
+      userId: Number(userId) || undefined,
+    });
 
     this.makeRequest(req);
   };
@@ -25,21 +27,29 @@ export default class CheckoutWrapper extends BaseWrapper {
 
   // Read all Checkout items by User with userId
   read = (userId: number) => {
-    const req = new AxiosBaseRequest(`${this.path}/${userId}`);
+    const req = new AxiosBaseRequest(`${this.path}/${Number(userId)}`);
     this.makeRequest(req);
   };
 
   // Delete Checkout by of a User by userId
   remove = (userId: number) => {
-    const req = new AxiosBaseRequest(this.path, "DELETE", { userId });
+    const req = new AxiosBaseRequest(this.path, "DELETE", {
+      userId: Number(userId),
+    });
+
     this.makeRequest(req);
   };
 
   // Delete a specific Checkout item of User with userId and checkoutId
   removeX = (userId: number, checkoutId: number) => {
-    const req = new AxiosBaseRequest(`${this.path}/${checkoutId}`, "DELETE", {
-      userId,
-    });
+    const req = new AxiosBaseRequest(
+      `${this.path}/${Number(checkoutId)}`,
+      "DELETE",
+      {
+        userId: Number(userId),
+      }
+    );
+
     this.makeRequest(req);
   };
 }

@@ -9,8 +9,13 @@ export default function CartProgram(App: Command): void {
   App.command("createCart <userId> <productId> <productCount>")
     .aliases(["cc", "addCart"])
     .description("Add cart with userId, productId and productCount")
-    .action((userId, productId, productCount) => {
-      const cart = new CartDefinition(userId, productId, productCount);
+    .action((userId: number, productId: number, productCount: number) => {
+      const cart = new CartDefinition(
+        Number(userId),
+        Number(productId),
+        Number(productCount)
+      );
+
       cartWrapper.create(cart);
     });
 
@@ -24,7 +29,7 @@ export default function CartProgram(App: Command): void {
   App.command("readCart <userId>")
     .aliases(["rc", "cart"])
     .description("Read all Cart items By userId")
-    .action((userId: number) => cartWrapper.read(userId));
+    .action((userId: number) => cartWrapper.read(Number(userId)));
 
   // Read one specific Cart item of a User by passing the userId and cartId
   App.command("readCartX <userId> <cartId>")
@@ -33,14 +38,14 @@ export default function CartProgram(App: Command): void {
       "Read one specific Cart item of a User by passing the userId and cartId"
     )
     .action((userId: number, cartId: number) => {
-      cartWrapper.readX(userId, cartId);
+      cartWrapper.readX(Number(userId), Number(cartId));
     });
 
   // Delete Cart by userId
   App.command("removeCart <userId>")
     .aliases(["rmc", "dC"])
     .description("Delete Cart by userId")
-    .action((userId: number) => cartWrapper.remove(userId));
+    .action((userId: number) => cartWrapper.remove(Number(userId)));
 
   // Delete a specific Cart item of a User by passing userId and cartId
   App.command("removeCartX <userId> <cartId>")
@@ -49,15 +54,15 @@ export default function CartProgram(App: Command): void {
       "Delete a specific Cart item of a User by passing userId and cartId"
     )
     .action((userId: number, cartId: number) => {
-      cartWrapper.removeX(userId, cartId);
+      cartWrapper.removeX(Number(userId), Number(cartId));
     });
 
   // Update Cart of a User with userId, cartId and  productCount
   App.command("updateCart <userId> <cartId> <productCount>")
     .aliases(["uc", "pC"])
     .description("Update Cart of a User with userId, cartId and  productCount")
-    .action((userId, cartId, productCount) => {
-      const cart = new CartDefinition(userId, 0, productCount);
-      cartWrapper.update(cartId, cart);
+    .action((userId: number, cartId: number, productCount: number) => {
+      const cart = new CartDefinition(Number(userId), 0, Number(productCount));
+      cartWrapper.update(Number(cartId), cart);
     });
 }

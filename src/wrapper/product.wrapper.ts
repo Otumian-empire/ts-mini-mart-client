@@ -13,10 +13,10 @@ export default class ProductWrapper extends BaseWrapper {
   // Create/Add Product with name, description, price and count
   create = ({ name, description, price, count }: ProductDefinition) => {
     const req = new AxiosBaseRequest(this.path, "POST", {
-      name,
-      description,
-      price,
-      count,
+      name: name || undefined,
+      description: description || undefined,
+      price: Number(price) || undefined,
+      count: Number(count) || undefined,
     });
 
     this.makeRequest(req);
@@ -30,13 +30,15 @@ export default class ProductWrapper extends BaseWrapper {
 
   // Read a Product by productId
   read = (productId: number) => {
-    const req = new AxiosBaseRequest(`${this.path}/${productId}`);
+    const req = new AxiosBaseRequest(`${this.path}/${Number(productId)}`);
     this.makeRequest(req);
   };
 
   // Delete a Product by productId
   remove = (productId: number) => {
-    const req = new AxiosBaseRequest(this.path, "DELETE", { productId });
+    const req = new AxiosBaseRequest(this.path, "DELETE", {
+      productId: Number(productId),
+    });
     this.makeRequest(req);
   };
 
@@ -46,10 +48,10 @@ export default class ProductWrapper extends BaseWrapper {
     { price, count, description }: ProductDefinition
   ) => {
     const req = new AxiosBaseRequest(this.path, "PUT", {
-      productId,
-      price,
-      count,
-      description,
+      productId: Number(productId),
+      description: description || undefined,
+      price: Number(price) || undefined,
+      count: Number(count) || undefined,
     });
 
     this.makeRequest(req);

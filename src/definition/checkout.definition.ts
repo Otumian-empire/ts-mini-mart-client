@@ -7,7 +7,7 @@ export default class Checkout extends BaseDefinition {
 
   constructor(uId: number, pIds: number[] = [], pCounts: number[] = []) {
     super();
-    this.userId = uId;
+    this.userId = Number(uId);
     this.productIds = pIds;
     this.productCounts = pCounts;
   }

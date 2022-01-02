@@ -7,8 +7,8 @@ export default class Cart extends BaseDefinition {
 
   constructor(uId: number, pId: number, pCount: number = 0) {
     super();
-    this.userId = uId;
-    this.productId = pId;
-    this.productCount = pCount;
+    this.userId = Number(uId);
+    this.productId = Number(pId);
+    this.productCount = Number(pCount);
   }
 }

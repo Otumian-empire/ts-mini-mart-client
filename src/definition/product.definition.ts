@@ -15,7 +15,7 @@ export default class Product extends BaseDefinition {
     super();
     this.name = name;
     this.description = desc;
-    this.price = price;
-    this.count = count;
+    this.price = Number(price);
+    this.count = Number(count);
   }
 }
