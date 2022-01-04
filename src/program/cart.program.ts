@@ -3,6 +3,7 @@ import CartDefinition from "../definition/cart.definition";
 import CartWrapper from "../wrapper/cart.wrapper";
 
 const cartWrapper = new CartWrapper();
+const CURRENT_PRODUCT_ID: number = 0;
 
 export default function CartProgram(App: Command): void {
   // Create/Add cart with userId, productId and productCount
@@ -62,7 +63,12 @@ export default function CartProgram(App: Command): void {
     .aliases(["uc", "pC"])
     .description("Update Cart of a User with userId, cartId and  productCount")
     .action((userId: number, cartId: number, productCount: number) => {
-      const cart = new CartDefinition(Number(userId), 0, Number(productCount));
+      const cart = new CartDefinition(
+        Number(userId), 
+        CURRENT_PRODUCT_ID, 
+        Number(productCount)
+      );
+        
       cartWrapper.update(Number(cartId), cart);
     });
 }
